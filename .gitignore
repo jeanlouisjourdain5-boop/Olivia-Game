@@ -1,0 +1,23 @@
+# Note interne de migration (pas utile sur GitHub)
+UPGRADE-NOTES.md
+
+# Fichiers systeme
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editeurs de code
+.vscode/
+.idea/
+*.swp
+*~
+
+# Dependances et fichiers generes (si le projet grandit)
+node_modules/
+dist/
+build/
+*.log
+
+# Secrets
+.env
+.env.*
