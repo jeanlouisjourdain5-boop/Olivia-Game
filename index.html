@@ -335,8 +335,8 @@
     margin-top: 6px;
   }
   .over-actions #replay { margin-top: 0; }
-  .share-wrap { position: relative; }
-  #share {
+  .brag-wrap { position: relative; }
+  #bragBtn {
     font-family: var(--font-display);
     font-weight: 700;
     font-size: clamp(14px, 2.6cqw, 18px);
@@ -352,9 +352,9 @@
     transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
     touch-action: manipulation;
   }
-  #share:hover { transform: scale(1.04); box-shadow: 0 0 16px rgba(255, 105, 180, 0.75); background: rgba(255, 105, 180, 0.12); }
-  #share:active { transform: scale(0.97); }
-  #share:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
+  #bragBtn:hover { transform: scale(1.04); box-shadow: 0 0 16px rgba(255, 105, 180, 0.75); background: rgba(255, 105, 180, 0.12); }
+  #bragBtn:active { transform: scale(0.97); }
+  #bragBtn:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
 
   /* Info-bulle « Copié ! » */
   #copied {
@@ -544,7 +544,7 @@
     <p class="hint">Appuyez sur la barre d’espace ou touchez l’écran pour jouer.</p>
     <p class="keys"><kbd>←</kbd> <kbd>→</kbd> ou <kbd>A</kbd> <kbd>D</kbd> pour changer de voie · <kbd>Espace</kbd> pour sauter<br>Sur mobile : balayez à gauche, à droite ou vers le haut, ou utilisez les flèches</p>
     <p class="keys">Les blocs <span style="color:var(--pink)">roses</span> se sautent, les murs <span style="color:#FF1493">rose foncé</span> s’esquivent.</p>
-    <span id="version" class="version"><span class="copy-sign">©</span> Olivia’s Neon Runner · v2026.10.24</span>
+    <span id="version" class="version"><span class="copy-sign">©</span> Olivia’s Neon Runner · v2026.10.24.2</span>
   </section>
 
   <section id="over" class="screen" hidden>
@@ -556,12 +556,12 @@
     </dl>
     <div class="over-actions">
       <button id="replay" type="button">Rejouer</button>
-      <div class="share-wrap">
-        <button id="share" type="button">Partager le score</button>
+      <div class="brag-wrap">
+        <button id="bragBtn" type="button">Partager le score</button>
         <span id="copied" role="status" aria-live="polite">Copié !</span>
       </div>
     </div>
-    <span class="version-over"><span class="copy-sign">©</span> Olivia’s Neon Runner · v2026.10.24</span>
+    <span class="version-over"><span class="copy-sign">©</span> Olivia’s Neon Runner · v2026.10.24.2</span>
   </section>
   <canvas id="cel"></canvas>
 
@@ -645,7 +645,7 @@
   // ---------- Sons (Web Audio, générés par le code) ----------
   let audioCtx = null, master = null, noiseBuf = null, coinBus = null;
   let muted = false;
-  try { muted = localStorage.getItem(MUTE_KEY) === "1"; } catch (e) { muted = false; }
+  // Son activé par défaut à chaque ouverture du jeu (demande initiale)
 
   function initAudio() {
     if (audioCtx) { if (audioCtx.state === "suspended") audioCtx.resume().catch(() => {}); return; }
@@ -766,7 +766,6 @@
 
   function setMuted(m) {
     muted = m;
-    try { localStorage.setItem(MUTE_KEY, m ? "1" : "0"); } catch (e) { /* stockage indisponible */ }
     muteBtn.setAttribute("aria-pressed", m ? "true" : "false");
     muteBtn.setAttribute("aria-label", m ? "Activer le son" : "Couper le son");
     muteBtn.title = m ? "Son coupé" : "Son activé";
@@ -1489,9 +1488,10 @@
     ctx.arc(x, y, r, 0, Math.PI * 2);
     ctx.fill();
     ctx.shadowBlur = 0;
-    ctx.fillStyle = "rgba(26,10,46,0.35)";
+    // reflet discret : la pièce reste un disque plein
+    ctx.fillStyle = "rgba(255,255,255,0.35)";
     ctx.beginPath();
-    ctx.arc(x, y, r * 0.55, 0, Math.PI * 2);
+    ctx.arc(x - r * 0.3, y - r * 0.3, r * 0.3, 0, Math.PI * 2);
     ctx.fill();
     ctx.restore();
   }
@@ -1795,7 +1795,7 @@
   replayBtn.addEventListener("click", (e) => { e.stopPropagation(); startGame(); });
 
   // ---------- Partage du score ----------
-  const shareBtn = document.getElementById("share");
+  const shareBtn = document.getElementById("bragBtn");
   const copiedEl = document.getElementById("copied");
   // Adresse publique du jeu, en dur : le lien partagé reste bon quel que soit l'endroit où le jeu tourne
   const GAME_URL = "https://olivia-game-five.vercel.app";
