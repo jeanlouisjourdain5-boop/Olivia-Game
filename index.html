@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>Neon Runner</title>
+<meta name="copyright" content="© 2026 Olivia’s Neon Runner. Tous droits réservés.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;700&display=swap">
@@ -485,6 +486,7 @@
   }
 
   /* Numéro de version, pour savoir quelle copie du jeu est ouverte */
+  .copy-sign { font-family: "Orbitron", Arial, Helvetica, sans-serif; font-size: 0.95em; }
   #version, .version-over {
     position: absolute;
     left: calc(10px + env(safe-area-inset-left, 0px));
@@ -542,7 +544,7 @@
     <p class="hint">Appuyez sur la barre d’espace ou touchez l’écran pour jouer.</p>
     <p class="keys"><kbd>←</kbd> <kbd>→</kbd> ou <kbd>A</kbd> <kbd>D</kbd> pour changer de voie · <kbd>Espace</kbd> pour sauter<br>Sur mobile : balayez à gauche, à droite ou vers le haut, ou utilisez les flèches</p>
     <p class="keys">Les blocs <span style="color:var(--pink)">roses</span> se sautent, les murs <span style="color:#FF1493">rose foncé</span> s’esquivent.</p>
-    <span id="version" class="version">v2026.10.24</span>
+    <span id="version" class="version"><span class="copy-sign">©</span> Olivia’s Neon Runner · v2026.10.24</span>
   </section>
 
   <section id="over" class="screen" hidden>
@@ -559,7 +561,7 @@
         <span id="copied" role="status" aria-live="polite">Copié !</span>
       </div>
     </div>
-    <span class="version-over" aria-hidden="true">v2026.10.24</span>
+    <span class="version-over"><span class="copy-sign">©</span> Olivia’s Neon Runner · v2026.10.24</span>
   </section>
   <canvas id="cel"></canvas>
 
