@@ -484,6 +484,19 @@
     100% { transform: scale(1); }
   }
 
+  /* Numéro de version, pour savoir quelle copie du jeu est ouverte */
+  #version, .version-over {
+    position: absolute;
+    left: calc(10px + env(safe-area-inset-left, 0px));
+    bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--dim);
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
   @keyframes blink { to { visibility: hidden; } }
   @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
   @media (prefers-reduced-motion: reduce) {
@@ -529,6 +542,7 @@
     <p class="hint">Appuyez sur la barre d’espace ou touchez l’écran pour jouer.</p>
     <p class="keys"><kbd>←</kbd> <kbd>→</kbd> ou <kbd>A</kbd> <kbd>D</kbd> pour changer de voie · <kbd>Espace</kbd> pour sauter<br>Sur mobile : balayez à gauche, à droite ou vers le haut, ou utilisez les flèches</p>
     <p class="keys">Les blocs <span style="color:var(--pink)">roses</span> se sautent, les murs <span style="color:#FF1493">rose foncé</span> s’esquivent.</p>
+    <span id="version" class="version">v2026.10.24</span>
   </section>
 
   <section id="over" class="screen" hidden>
@@ -545,6 +559,7 @@
         <span id="copied" role="status" aria-live="polite">Copié !</span>
       </div>
     </div>
+    <span class="version-over" aria-hidden="true">v2026.10.24</span>
   </section>
   <canvas id="cel"></canvas>
 
