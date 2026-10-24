@@ -1780,8 +1780,10 @@
   // ---------- Partage du score ----------
   const shareBtn = document.getElementById("share");
   const copiedEl = document.getElementById("copied");
+  // Adresse publique du jeu, en dur : le lien partagé reste bon quel que soit l'endroit où le jeu tourne
+  const GAME_URL = "https://olivia-game-five.vercel.app";
   function shareText() {
-    return "🏃 J'ai obtenu un score de " + score + " sur Olivia's Neon Runner ! Tu peux faire mieux que moi ? 🎮 " + window.location.href;
+    return "🏃 J'ai obtenu un score de " + score + " sur Olivia's Neon Runner ! Tu peux faire mieux que moi ? 🎮 " + GAME_URL;
   }
   function copyFallback(text) {
     const ta = document.createElement("textarea");
